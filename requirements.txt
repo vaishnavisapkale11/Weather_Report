@@ -1,0 +1,9 @@
+Flask
+requests
+pandas
+openpyxl
+matplotlib
+weasyprint
+flask_sqlalchemy
+jinja2
+SQLAlchemy
