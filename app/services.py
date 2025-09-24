@@ -33,7 +33,8 @@ def save_df_to_db(df: pd.DataFrame):
     try:
         for _, row in df.iterrows():
 
-            exists = session.query(WeatherData)
+            exists = session.query(WeatherData).filter_by(timestamp=str(row["timestamps"])).first()
+            print(exists)
             if not exists:
                 record = WeatherData(
                     timestamp=str(row["timestamps"]),
@@ -67,5 +68,3 @@ def fetch_and_store_weather_data(lat, lon):
     humidity = data["hourly"]["relative_humidity_2m"]
     df=pandas.DataFrame({'timestamps':timestamps, 'temperature':temps,'humidity':humidity})
     save_df_to_db(df.astype(str))
-
-fetch_and_store_weather_data(47.37, 8.55)
